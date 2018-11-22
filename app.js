@@ -18,8 +18,8 @@ app.use(require('./components'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 https.createServer({
-    key: fs.readFileSync(process.env.SERVERKEY),
-    cert: fs.readFileSync(process.env.SERVERCERT),
+    key: fs.readFileSync(process.env.SERVER_KEY),
+    cert: fs.readFileSync(process.env.SERVER_CERT),
     requestCert: true,
     rejectUnauthorized: false
 }, app).listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`));
