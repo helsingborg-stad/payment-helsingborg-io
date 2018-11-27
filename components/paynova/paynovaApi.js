@@ -1,11 +1,12 @@
 const router = require('express').Router();
 const paynova = require('./dalPaynova');
+const SchemaValidator = require('../middlewares/schemaValidators');
 
-router.post('/addresses', async (req, res) => {
+const validateRequest = SchemaValidator(true);
+
+router.post('/addresses', validateRequest, async (req, res) => {
     try {
-        const { countryCode, pno } = req.body;
-
-        const response = await paynova.addresses(countryCode, pno);
+        const response = await paynova.addresses(req.body);
 
         return res.json(
             response
@@ -16,17 +17,9 @@ router.post('/addresses', async (req, res) => {
     }
 });
 
-router.post('/options', async (req, res) => {
+router.post('/options', validateRequest, async (req, res) => {
     try {
-        const { totalAmount, currencyCode, paymentChannelId, countryCode, languageCode } = req.body;
-
-        const response = await paynova.paymentOptions({
-            totalAmount,
-            currencyCode,
-            paymentChannelId,
-            countryCode,
-            languageCode
-        });
+        const response = await paynova.paymentOptions(req.body);
 
         return res.json(
             response
@@ -37,9 +30,39 @@ router.post('/options', async (req, res) => {
     }
 });
 
-router.post('orders/create', async (req, res) => {
+router.post('/orders/create', validateRequest, async (req, res) => {
     try {
+        const response = await paynova.createOrder(req.body);
 
+        return res.json(
+            response
+        );
+    } catch (err) {
+        console.log('err', err);
+        res.json(err);
+    }
+});
+
+router.post('/orders/:orderid/authorizePayment', validateRequest, async (req, res) => {
+    try {
+        const response = await paynova.authorizePayment(req.params.orderid, req.body);
+
+        return res.json(
+            response
+        );
+    } catch (err) {
+        console.log('err', err);
+        res.json(err);
+    }
+});
+
+router.post('/orders/:orderid/initializePayment', validateRequest, async (req, res) => {
+    try {
+        const response = await paynova.initializePayment(req.params.orderid, req.body);
+
+        return res.json(
+            response
+        );
     } catch (err) {
         console.log('err', err);
         res.json(err);

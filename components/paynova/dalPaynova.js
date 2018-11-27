@@ -1,15 +1,32 @@
 /* eslint-disable no-undef */
 const axios = require('axios');
 
-exports.addresses = async (countryCode, pno) => {
-    const response = await client.get(process.env.PAYNOVA_API_URL + `/addresses/${countryCode}/${pno}`);
+exports.addresses = async (requestData) => {
+    const response = await client.get(process.env.PAYNOVA_API_URL + `/addresses/${requestData.countryCode}/${requestData.GovernmentId}`);
     console.log('addresses', response.data);
     return handleResponse(response);
 };
 
-exports.paymentOptions = async (payload) => {
-    const response = await client.post(process.env.PAYNOVA_API_URL + '/paymentoptions/', payload);
+exports.paymentOptions = async (requestData) => {
+    const response = await client.post(process.env.PAYNOVA_API_URL + '/paymentoptions/', requestData);
     console.log('paymentoptions', response.data);
+    return handleResponse(response);
+};
+
+exports.createOrder = async (requestData) => {
+    const response = await client.post(process.env.PAYNOVA_API_URL + '/orders/create/', requestData);
+    return handleResponse(response);
+};
+
+exports.authorizePayment = async (orderId, requestData) => {
+    const response = await client.post(process.env.PAYNOVA_API_URL + `/orders/${orderId}/authorizePayment`, requestData);
+    console.log('authorizePayment', response.data);
+    return handleResponse(response);
+};
+
+exports.initializePayment = async (orderId, requestData) => {
+    const response = await client.post(process.env.PAYNOVA_API_URL + `/orders/${orderId}/initializePayment`, requestData);
+    console.log('initializePayment', response.data);
     return handleResponse(response);
 };
 
@@ -26,7 +43,8 @@ handleResponse = (resp) => {
     } else {
         return {
             status: 400,
-            message: `${resp.data.status.errorNumber} - ${resp.data.status.statusKey} - ${resp.data.status.statusMessage}`
+            message: `${resp.data.status.errorNumber} - ${resp.data.status.statusKey} - ${resp.data.status.statusMessage}`,
+            errors: resp.data.status.errors
         };
     }
 };
