@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon -r dotenv/config app.js",
-    "test": "./node_modules/.bin/mocha",
-    "test:watch": "mocha --watch"
+    "test:watch": "./node_modules/.bin/mocha components/**/*.test.js --watch"
   },
   "author": "Eldin Behlic",
   "license": "MIT",
