@@ -43,6 +43,19 @@ router.post('/orders/create', validateRequest, async (req, res) => {
     }
 });
 
+router.post('/orders/:orderid/initializePayment', validateRequest, async (req, res) => {
+    try {
+        const response = await paynova.initializePayment(req.params.orderid, req.body);
+
+        return res.json(
+            response
+        );
+    } catch (err) {
+        console.log('err', err);
+        res.json(err);
+    }
+});
+
 router.post('/orders/:orderid/authorizePayment', validateRequest, async (req, res) => {
     try {
         const response = await paynova.authorizePayment(req.params.orderid, req.body);
@@ -56,9 +69,9 @@ router.post('/orders/:orderid/authorizePayment', validateRequest, async (req, re
     }
 });
 
-router.post('/orders/:orderid/initializePayment', validateRequest, async (req, res) => {
+router.post('/orders/finalizePayment', validateRequest, async (req, res) => {
     try {
-        const response = await paynova.initializePayment(req.params.orderid, req.body);
+        const response = await paynova.finalizePayment(req.params.orderid, req.body);
 
         return res.json(
             response

@@ -18,15 +18,30 @@ exports.createOrder = async (requestData) => {
     return handleResponse(response);
 };
 
+exports.initializePayment = async (orderId, requestData) => {
+    const response = await client.post(process.env.PAYNOVA_API_URL + `/orders/${orderId}/initializePayment`, requestData);
+    // console.log('initializePayment', response.data);
+    return handleResponse(response);
+};
+
 exports.authorizePayment = async (orderId, requestData) => {
     const response = await client.post(process.env.PAYNOVA_API_URL + `/orders/${orderId}/authorizePayment`, requestData);
     // console.log('authorizePayment', response.data);
     return handleResponse(response);
 };
 
-exports.initializePayment = async (orderId, requestData) => {
-    const response = await client.post(process.env.PAYNOVA_API_URL + `/orders/${orderId}/initializePayment`, requestData);
-    // console.log('initializePayment', response.data);
+exports.finalizePayment = async (orderId, requestData) => {
+
+    let finalizeEndpoint = '';
+
+    if (requestData.method === 'orderId') {
+        finalizeEndpoint = `/orders/${orderId}/transactions/${transactionId}/finalize/${totalAmount}`;
+    } else {
+        finalizeEndpoint = `/transactions/${transactionId}/finalize/${totalAmount}`;
+    }
+
+    const response = await client.post(process.env.PAYNOVA_API_URL + finalizeEndpoint, requestData);
+    // console.log('finalizePayment', response.data);
     return handleResponse(response);
 };
 
