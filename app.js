@@ -17,7 +17,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.use(require('./components'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-https.createServer({
+const server = https.createServer({
     key: fs.readFileSync(process.env.SERVER_KEY),
     cert: fs.readFileSync(process.env.SERVER_CERT),
     requestCert: true,
@@ -26,4 +26,4 @@ https.createServer({
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-module.exports = app; // for testing
+module.exports = server; // for testing

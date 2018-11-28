@@ -25,6 +25,7 @@
     "await": "^0.2.6",
     "axios": "^0.18.0",
     "chai": "^4.2.0",
+    "chai-asserttype": "^1.0.5",
     "chai-http": "^4.2.0",
     "dotenv": "^6.1.0",
     "easy-soap-request": "^2.3.0",

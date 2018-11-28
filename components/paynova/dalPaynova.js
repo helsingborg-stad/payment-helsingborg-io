@@ -9,7 +9,7 @@ exports.addresses = async (requestData) => {
 
 exports.paymentOptions = async (requestData) => {
     const response = await client.post(process.env.PAYNOVA_API_URL + '/paymentoptions/', requestData);
-    console.log('paymentoptions', response.data);
+    // console.log('paymentoptions', response.data);
     return handleResponse(response);
 };
 
@@ -20,13 +20,13 @@ exports.createOrder = async (requestData) => {
 
 exports.authorizePayment = async (orderId, requestData) => {
     const response = await client.post(process.env.PAYNOVA_API_URL + `/orders/${orderId}/authorizePayment`, requestData);
-    console.log('authorizePayment', response.data);
+    // console.log('authorizePayment', response.data);
     return handleResponse(response);
 };
 
 exports.initializePayment = async (orderId, requestData) => {
     const response = await client.post(process.env.PAYNOVA_API_URL + `/orders/${orderId}/initializePayment`, requestData);
-    console.log('initializePayment', response.data);
+    // console.log('initializePayment', response.data);
     return handleResponse(response);
 };
 
