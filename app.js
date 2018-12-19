@@ -13,7 +13,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => res.send('Index'));
+
 app.use(require('./components'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

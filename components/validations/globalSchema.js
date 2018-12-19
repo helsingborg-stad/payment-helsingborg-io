@@ -47,4 +47,14 @@ const lineItem = Joi.object().keys({
 
 const lineItems = Joi.array().items(lineItem);
 
-module.exports = { countryCode, totalAmount, currencyCode, governmentId, name, telephone, paymentChannelId, nameAndAddress, lineItems };
+module.exports = {
+    countryCode,
+    totalAmount,
+    currencyCode,
+    governmentId,
+    name,
+    telephone,
+    paymentChannelId,
+    nameAndAddress,
+    lineItems
+};

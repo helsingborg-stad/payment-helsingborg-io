@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const paynova = require('./dalPaynova');
+const paynova = require('./dal');
 const SchemaValidator = require('../middlewares/schemaValidators');
 
 const validateRequest = SchemaValidator(true);
