@@ -1,13 +1,14 @@
 {
-  "name": "minasiderboiler",
+  "name": "payment-api",
   "version": "0.0.1",
-  "description": "Boilerplate for the mina sider project",
+  "description": "Api for handling payments inside Helsingborg Stad",
   "main": "app.js",
   "scripts": {
+    "dev": "npm-run-all --parallel start test:watch",
     "start": "nodemon -r dotenv/config app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:watch": "./node_modules/.bin/mocha components/**/*.test.js --watch"
   },
-  "author": "Morgan Ottosson",
+  "author": "Eldin Behlic",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^5.9.0",
@@ -16,18 +17,23 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "nodemon": "^1.18.6"
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.7"
   },
   "dependencies": {
     "async": "^2.6.1",
     "await": "^0.2.6",
     "axios": "^0.18.0",
+    "chai": "^4.2.0",
+    "chai-asserttype": "^1.0.5",
+    "chai-http": "^4.2.0",
     "dotenv": "^6.1.0",
     "easy-soap-request": "^2.3.0",
     "express": "^4.16.4",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
     "joi": "^14.0.6",
+    "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
     "redis": "^2.8.0",
     "swagger-ui-express": "^4.0.1"

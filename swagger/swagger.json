@@ -2,29 +2,36 @@
     "swagger": "2.0",
     "info": {
         "version": "0.0.1",
-        "title": "Simple API",
-        "description": "A simple API to learn how to write OpenAPI Specification"
+        "title": "Payment Api",
+        "description": "Api for using payment methods throughout Helsingborg stad."
     },
-    "host": "simple.api",
-    "basePath": "/openapi101",
+    "host": "helsingborg.se",
+    "basePath": "/api/payment",
     "paths": {
-        "/find": {
-            "get": {
-                "summary": "Gets some persons",
-                "description": "Returns a object containing person.",
+        "/addresses": {
+            "post": {
+                "summary": "Gets addresses related to a person",
+                "description": "Returns a object containing addresses.",
                 "parameters": [
                     {
-                        "name": "id",
+                        "CountryCode": "id",
                         "in": "body",
-                        "description": "ID of person",
+                        "description": "Countrycode of person",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "GovernmentId": "id",
+                        "in": "body",
+                        "description": "GovernmentId of person",
                         "required": true,
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "A object of Person",
-                        "type": "object",
+                        "description": "An array of Address",
+                        "type": "array",
                         "properties": {
                             "id": {
                                 "type": "integer"
