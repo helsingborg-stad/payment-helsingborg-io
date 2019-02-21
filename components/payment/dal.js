@@ -31,7 +31,6 @@ exports.authorizePayment = async (orderId, requestData) => {
 };
 
 exports.finalizePayment = async (orderId, requestData) => {
-
     let finalizeEndpoint = '';
 
     if (requestData.method === 'orderId') {
